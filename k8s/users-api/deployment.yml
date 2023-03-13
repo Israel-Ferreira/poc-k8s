@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: users-api-deployment
+
+spec:
+  selector:
+    matchLabels:
+      app: users-api
+
+  replicas: 3
+
+  template:
+    metadata:
+      name: users-api-pod
+      labels:
+        app: users-api
+        
+    spec:
+      containers:
+        - name: users-api-container
+          image: israelsouza17/users-api-poc-k8s:1.1
+
+          resources:
+            limits:
+              cpu: "256m"
+              memory: "256Mi"
+
+          ports:
+            - containerPort: 5600
+
+    
